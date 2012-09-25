@@ -2,99 +2,33 @@
 <link href="acalc.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"> </script>
 
-
 <script language="javascript"> 
-function showMore() {
-	var ele = document.getElementById("toggleText");
-	var text = document.getElementById("displayText");
-	if(ele.style.display == "block") {
-    		ele.style.display = "none";
-		text.innerHTML = 'View Work Breakdown +';
-  	}
-	else {
-		ele.style.display = "block";
-		text.innerHTML = 'Hide -';
-	}
+function showMore(num_id) {
+    var ele = document.getElementById("toggleText" + num_id);
+    var text = document.getElementById("displayText");
+    if(ele.style.display == "block") {
+            ele.style.display = "none";
+        text.innerHTML = 'View Work Breakdown +';
+    }
+    else {
+        ele.style.display = "block";
+        text.innerHTML = 'Hide -';
+    }
 }
-</script>
-
-<script language="javascript"> 
-function showMore2() {
-	var ele1 = document.getElementById("toggleText1");
-	var text = document.getElementById("displayText1");
-	if(ele1.style.display == "block") {
-    		ele1.style.display = "none";
-		text.innerHTML = 'View Work Breakdown +';
-  	}
-	else {
-		ele1.style.display = "block";
-		text.innerHTML = 'Hide -';
-	}
-} 
-</script>
-<script language="javascript"> 
-function showMore3() {
-	var ele2 = document.getElementById("toggleText2");
-	var text = document.getElementById("displayText2");
-	if(ele2.style.display == "block") {
-    		ele2.style.display = "none";
-		text.innerHTML = 'View Work Breakdown +';
-  	}
-	else {
-		ele2.style.display = "block";
-		text.innerHTML = 'Hide -';
-	}
-} 
-</script>
-<script language="javascript"> 
-function showMore4() {
-	var ele3 = document.getElementById("toggleText3");
-	var text = document.getElementById("displayText3");
-	if(ele3.style.display == "block") {
-    		ele3.style.display = "none";
-		text.innerHTML = 'View Work Breakdown +';
-  	}
-	else {
-		ele3.style.display = "block";
-		text.innerHTML = 'Hide -';
-	}
-} 
-</script>
-
-</script>
-<script language="javascript"> 
-function showMore5() {
-	var ele4 = document.getElementById("toggleText4");
-	var text = document.getElementById("displayText4");
-	if(ele4.style.display == "block") {
-    		ele4.style.display = "none";
-		text.innerHTML = 'View Work Breakdown +';
-  	}
-	else {
-		ele4.style.display = "block";
-		text.innerHTML = 'Hide -';
-	}
-} 
 </script>
 
 <script>
 $(document).ready(function() {
- 
-	$('div.accordionButton').click(function() {
-		$('div.accordionContent').slideUp('normal');	
-		$(this).next().slideDown('normal');
-	});
- 
-	$("div.accordionContent").hide();
- 
+    $('div.accordionButton').click(function() {
+        $('div.accordionContent').slideUp('normal');    
+        $(this).next().slideDown('normal');
+    });
+    $("div.accordionContent").hide();
 });
 </script>
 
 <div id="ach">
-<?php
-
-$enddate = $_POST['enddate'];
-
+<?php $enddate = $_POST['enddate'];
 require("dateDiff.php");
 $today = $_POST['startdate'];
 $result =  dateDiff("-", $enddate, $today);
@@ -117,11 +51,17 @@ $date = strtotime(date("d-m-y", strtotime($today)) . " +$s1 day");
 echo "<span>Planning</span>to be completed on: <b>".date('d-m-y', $date). "<br></b>";
 ?>
 
-<a id="displayText" href="javascript:showMore();">View Work Breakdown +</a>
-<div id="toggleText" style="display: none">
+<a id="displayText1" href="javascript:showMore(1);">View Work Breakdown +</a>
+<div id="toggleText1" style="display: none">
         <ul>
         <div class="accordionButton"><li>Understand The Assignment+</li></div>
-        <div class="accordionContent">It is always worth spending some time considering carefully what you have been asked to do and making sure you understand what is expected. <a href="http://www.google.com">Understanding the essay brief</a> explains some key terms.</div>
+        <div class="accordionContent">
+            It is always worth spending some time considering carefully 
+            what you have been asked to do and making sure you understand 
+            what is expected. 
+            <a href="http://www.google.com">Understanding the essay brief</a> 
+            explains some key terms.</div>
+            See also Assignment Types for other forms of academic writing.
         <li>Generate Ideas</li>
         <li>Make Research Plan</li>
     </ul> 
@@ -129,17 +69,30 @@ echo "<span>Planning</span>to be completed on: <b>".date('d-m-y', $date). "<br><
 <?php
 echo "</li>";
 
+/*
+// do this in a function?
+require_once("includes/schedule_functions.php");
+require_once('includes/krumo/class.krumo.php');
+
+$date = strtotime(date("d-m-y", strtotime($today)) . " +$s1 day");
+$introduction = 'hello there';
+$class = 'plan';
+$steps = array(
+  'step 1',
+  'step 2',
+  );
+echo phase_list('Planning', $steps, $date, $class);
+*/
 
 $step2 = date('d-m-y', $date);
-
 echo "<li>";
 echo "<div class='acinfo res'>";
 $date2 = strtotime(date("d-m-y", strtotime($step2)) . " +$s2 day");
 echo "<span>Researching</span>will need to be completed on:<b> ".date('d-m-y', $date2)."<br></b>";
 ?>
 
-<a id="displayText1" href="javascript:showMore2();">View Work Breakdown +</a>
-<div id="toggleText1" style="display: none">
+<a id="displayText2" href="javascript:showMore(2);">View Work Breakdown +</a>
+<div id="toggleText2" style="display: none">
         <ul>
         <li>Locate Sources</li>
         <li>Review Sources</li>
@@ -152,15 +105,13 @@ echo "<span>Researching</span>will need to be completed on:<b> ".date('d-m-y', $
 echo "</li>";
 
 $step3 = date('d-m-y', $date2);
-
 echo "<li>";
 echo "<div class='acinfo org'>";
 $date3 = strtotime(date("d-m-y", strtotime($step3)) . " +$s3 day");
 echo "<span>Organising</span>will need to be completed on: <b>".date('d-m-y', $date3)."<br></b>";
 ?>
-
-<a id="displayText2" href="javascript:showMore3();">View Work Breakdown +</a>
-<div id="toggleText2" style="display: none">
+<a id="displayText3" href="javascript:showMore(3);">View Work Breakdown +</a>
+<div id="toggleText3" style="display: none">
         <ul>
         <li>Collect Your Notes</li>
         <li>Arrange Notes to Reflect a Possible Argument</li>
@@ -171,15 +122,13 @@ echo "<span>Organising</span>will need to be completed on: <b>".date('d-m-y', $d
 echo "</li>";
 
 $step4 = date('d-m-y', $date3);
-
 echo "<li>";
 echo "<div class='acinfo wri'>";
 $date4 = strtotime(date("d-m-y", strtotime($step4)) . " +$s4  day");
 echo "<span>Writing</span>will need to be completed on: <b>".date('d-m-y', $date4)."<br></b>";
 ?>
-
-<a id="displayText3" href="javascript:showMore4();">View Work Breakdown +</a>
-<div id="toggleText3" style="display: none">
+<a id="displayText4" href="javascript:showMore(4);">View Work Breakdown +</a>
+<div id="toggleText4" style="display: none">
     <ul>
         <li>Start Your First Draft</li>
         <li>Follow Up Your Additional Research</li>
@@ -190,17 +139,14 @@ echo "<span>Writing</span>will need to be completed on: <b>".date('d-m-y', $date
 <?php
 echo "</li>";
 
-
 $step5 = date('d-m-y', $enddate);
-
 echo "<li>";
 echo "<div class='acinfo fin'>";
 $date5 = strtotime(date("d-m-y", strtotime($enddate)) . " -1  day");
 echo "<span>Reviewing</span>will need to be completed on:<b> ".date('d-m-y', $date5)."<br></b>";
 ?>
-
-<a id="displayText4" href="javascript:showMore5();">View Work Breakdown +</a>
-<div id="toggleText4" style="display: none">
+<a id="displayText5" href="javascript:showMore(5);">View Work Breakdown +</a>
+<div id="toggleText5" style="display: none">
     <ul>
         <li>Speak to a Writing Advisor</li>
         <li>Check Argument</li>
@@ -212,7 +158,7 @@ echo "<span>Reviewing</span>will need to be completed on:<b> ".date('d-m-y', $da
 <?php
 echo "</li>";
 echo "</ul>";
-
+ 
 ?>
         <form action="pdf.php" method="post"  target="_blank">
           <p>
@@ -236,7 +182,7 @@ echo "</ul>";
             <input type="hidden" value="<?php echo date('d-m-y', $date2);?>" name="date2"/>
             <input type="hidden" value="<?php echo date('d-m-y', $date3); ?>" name="date3"/>
             <input type="hidden" value="<?php echo date('d-m-y', $date4); ?>" name="date4"/>
-	    <input type="hidden" value="<?php echo date('d-m-y', $date5); ?>" name="date5"/>
+        <input type="hidden" value="<?php echo date('d-m-y', $date5); ?>" name="date5"/>
           
             <input type="submit" value="Please send me email reminders" class="text_button notbut notbutb">
           </p>
