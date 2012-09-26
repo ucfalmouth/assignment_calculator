@@ -1086,7 +1086,7 @@ function _getpageformat($format)
 function _getfontpath()
 {
 	if(!defined('FPDF_FONTPATH') && is_dir(dirname(__FILE__).'/font'))
-		define('FPDF_FONTPATH',dirname(__FILE__).'/styles/font/');
+		define('FPDF_FONTPATH',dirname(__FILE__).'/font/');
 	return defined('FPDF_FONTPATH') ? FPDF_FONTPATH : '';
 }
 
