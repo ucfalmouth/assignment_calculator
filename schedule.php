@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <link href="styles/acalc.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"> </script>
 
@@ -6,11 +8,12 @@ function showMore(num_id) {
     var ele = document.getElementById("toggleText" + num_id);
     var text = document.getElementById("displayText" + num_id);
     if(ele.style.display == "block") {
-            ele.style.display = "none";
+        
+        $(ele).slideUp('fast'); 
         text.innerHTML = 'View Work Breakdown +';
     }
     else {
-        ele.style.display = "block";
+        $(ele).slideDown('fast');
         text.innerHTML = 'Hide -';
     }
 }
@@ -45,29 +48,29 @@ $schedule = google_input($googledoc);
 $schedule = parse_google_schedule($schedule);
 
 $num_id = 1;
-foreach($schedule as $phase) {
+$last_deadline = 0;
+foreach($schedule as $key => $phase) {
 
     $sections = $phase['sections'];
-    $end = $assignment_end * $phase['duration'] * 0.01;
-    $end = floor($end);
+    $deadline = $assignment_end * $phase['duration'] * 0.01;
+    $deadline = floor($deadline);
+    $deadline = $deadline + $last_deadline;
+    $last_deadline = $deadline;
 
-    $date = strtotime(date("d-m-y", strtotime($today)) . " +$end day");
-    $introduction = $sections[0]['description'];
+    $date = strtotime(date("d-m-y", strtotime($today)) . " +$deadline days");
+    $date = date('d-m-y', $date);
+    $schedule[$key]['date'] = $date;
     $class = 'colour-'.$num_id;
 
     echo phase_list($phase['phase'], $sections, $date, $num_id, $class);
     $num_id++;
 }
- 
+//krumo($schedule);
+$_SESSION['schedule']=$schedule;
 ?>
+
+
 <form action="pdf.php" method="post"  target="_blank">
-  <p>
-    <label for="message"></label>
-    <input type="hidden" value="<?php echo date('d-m-y', $date); ?>" name="date1"/>
-    <input type="hidden" value="<?php echo date('d-m-y', $date2);?>" name="date2"/>
-    <input type="hidden" value="<?php echo date('d-m-y', $date3); ?>" name="date3"/>
-    <input type="hidden" value="<?php echo date('d-m-y', $date4); ?>" name="date4"/>
-  </p>
   <p>
     <input type="submit" value="Download schedule as a PDF" class="text_button notbut">
   </p>
@@ -78,12 +81,6 @@ foreach($schedule as $phase) {
   <div>If you would like to recieve email reminders of your schedule, please submit your email address:</div>
     <label for="message"></label>
     <input type="text" value="" name="email" placeholder="name@mail.com" class="acinput">
-    <input type="hidden" value="<?php echo date('d-m-y', $date); ?>" name="date1"/>
-    <input type="hidden" value="<?php echo date('d-m-y', $date2);?>" name="date2"/>
-    <input type="hidden" value="<?php echo date('d-m-y', $date3); ?>" name="date3"/>
-    <input type="hidden" value="<?php echo date('d-m-y', $date4); ?>" name="date4"/>
-<input type="hidden" value="<?php echo date('d-m-y', $date5); ?>" name="date5"/>
-  
     <input type="submit" value="Please send me email reminders" class="text_button notbut notbutb">
   </p>
   <div class="newbut"><a href="test.php">Create another schedule</a></div>
