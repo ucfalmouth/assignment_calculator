@@ -1,4 +1,4 @@
-<link href="acalc.css" rel="stylesheet" type="text/css" />
+<link href="styles/acalc.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"> </script>
 
 <script language="javascript"> 
@@ -29,7 +29,7 @@ $(document).ready(function() {
 <div id="ach">
 <?php 
 $enddate = $_POST['enddate'];
-require("dateDiff.php");
+require("includes/dateDiff.php");
 $today = $_POST['startdate'];
 $assignment_end =  dateDiff("-", $enddate, $today);
 

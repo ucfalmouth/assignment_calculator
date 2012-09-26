@@ -24,8 +24,8 @@
  
 <div id="ach">
 <form method='post' action='schedule.php'>
-   <div class="title">Assignment <span class="start">Start Date</span></div> <input type="text" name="startdate" id="datepicker" class="acinput" placeholder="<?php echo date('d-m-y'); ?>"/>
-    <div class="title">Assignment <span class="end">Deadline</span></div> <input type="text" name="enddate" id="datepicker2" class="acinput" placeholder="<?php echo date("d-m-y", strtotime("+ 1 month")); ?>"/>
+   <div class="title">Assignment <span class="start">Start Date</span></div> <input type="text" name="startdate" id="datepicker" class="acinput" placeholder="01-01-12"/>
+    <div class="title">Assignment <span class="end">Deadline</span></div> <input type="text" name="enddate" id="datepicker2" class="acinput" placeholder="01-02-12"/>
     <div><input type="submit" class="subbut" value="Get my assignment schedule"></div>
 </form>
 

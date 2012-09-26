@@ -1,6 +1,6 @@
 <?php
 function phase_list($section, $steps = array(), $date, $num_id, $class = NULL) {
-    // krumo($steps);
+    // generate a block of html to represent the essay phase
     ob_start();
     ?>
     <li>

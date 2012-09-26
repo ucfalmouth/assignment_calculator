@@ -2,7 +2,7 @@
 //Start session
 	session_start();
 	//Include database connection details
-	require_once('config.php');
+	require_once('config/config.php');
 	
 	//Array to store validation errors
 	$errmsg_arr = array();
