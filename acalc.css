@@ -7,13 +7,13 @@ body{
 	background:#e5e5e5;
 }
 
-.accordionButton {	
-
-	}
+.accordionButton:hover {	
+color: white;
+}
  
 .accordionContent {	
-
-	}
+padding: 10px;
+}
 
 
 .title{
@@ -158,18 +158,18 @@ body{
 	cursor:pointer;
 }
 
-.plan{
+.colour-1{
 	background:#14c85a;
 }
-.res{
+.colour-2{
 	background:#1cbbb4;
 }
-.org{
+.colour-3{
 	background:#f5b70e;
 }
-.wri{
+.colour-4{
 	background:#f26d7d;
 }
-.fin{
+.colour-5{
 	background:#f06eaa;
 }

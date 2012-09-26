@@ -1,20 +1,23 @@
 <?php
-function phase_list($section, $steps = array(), $date, $class = NULL) {
-    krumo($steps);
+function phase_list($section, $steps = array(), $date, $num_id, $class = NULL) {
+    // krumo($steps);
     ob_start();
     ?>
     <li>
     <div class='acinfo <?php echo $class; ?>'>
         <span><?php echo $section; ?></span>to be completed on: <b><?php echo date('d-m-y', $date) ?><br></b>
-        <a id="displayText" href="javascript:showMore2();">View Work Breakdown +</a>
-        <div id="toggleText" >
+        <a id="displayText<?php echo $num_id; ?>" href="javascript:showMore(<?php echo $num_id; ?>);">View Work Breakdown +</a>
+        <div id="toggleText<?php echo $num_id; ?>" style="display: none;" >
             <ul>
-            <div class="accordionButton"><li>Understand The Assignment +</li></div>
-            <div class="accordionContent">
-                <?php  echo $introduction; 
-                foreach($steps as $step => $content) { ?>
-                    <li><?php echo $step; ?></li>               
+            <?php foreach($steps as $step) { ?>
+            <div class="accordionButton"><li><strong><?php echo $step['title']; ?></strong> +</li></div>
+            <div class="accordionContent" >
+                <li><?php echo $step['description']; ?></li>
+                <?php foreach($step['links'] as $link) { ?>
+                    <li><?php echo html_link($link['title'],$link['url']); ?></li>
                 <?php } ?>
+            </div>              
+             <?php } ?>
             </ul> 
         </div>
     </div>
