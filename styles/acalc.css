@@ -25,6 +25,7 @@ padding: 10px;
 .title{
 	font-size:30px;
 	font-weight:bold;
+	margin: 20px 0 20px 0;
 }
 .end{
 	color:#C03;
@@ -162,6 +163,16 @@ padding: 10px;
 	color:#fff;
 	text-decoration:none;
 	cursor:pointer;
+}
+
+.dateform,
+.dateform div,
+.dateform div input {
+	text-align:center;
+	margin: 20px auto 0 auto;
+}
+.dateform .title {
+	margin: 20px 0 20px 0;
 }
 
 .colour-1{
