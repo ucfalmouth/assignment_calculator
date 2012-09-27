@@ -7,6 +7,12 @@ body{
 	background:#e5e5e5;
 }
 
+h1 {
+	color: #aaa;
+	text-align:center;
+	margin-top:20px;
+}
+
 .accordionButton:hover {	
 color: white;
 }

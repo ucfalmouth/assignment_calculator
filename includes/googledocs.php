@@ -22,22 +22,24 @@ function parse_google_schedule($schedule_array) {
   foreach($headers as $header) {
     $header = strtolower($header);
      //echo $header;
-    if (strstr($header, 'phase')){
-      $column_phase = $i;
-    } elseif (strstr($header, 'section')){
-      $column_section = $i;
-    } elseif (strstr($header, 'link')){
-      if (strstr($header, 'text')){
-        $column_link_text = $i;
-        //echo 'url_text: '.$header;
+    if (!strstr($header, '#')){
+      if (strstr($header, 'phase')){
+        $column_phase = $i;
+      } elseif (strstr($header, 'section')){
+        $column_section = $i;
       } elseif (strstr($header, 'link')){
-        $column_link_url = $i;
-        //echo 'url_url:  '.$i;
+        if (strstr($header, 'text')){
+          $column_link_text = $i;
+          //echo 'url_text: '.$header;
+        } elseif (strstr($header, 'link')){
+          $column_link_url = $i;
+          //echo 'url_url:  '.$i;
+        }
+      } elseif (strstr($header, 'description')){
+        $column_description = $i;
+      } elseif (strstr($header, 'duration')){
+        $column_duration = $i;
       }
-    } elseif (strstr($header, 'description')){
-      $column_description = $i;
-    } elseif (strstr($header, 'duration')){
-      $column_duration = $i;
     }
 
     $i++;

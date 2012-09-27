@@ -30,8 +30,9 @@ $(document).ready(function() {
 </script>
 
 <div id="ach">
-<?php 
+<h1>Assignment Calculator</h1>
 
+<?php 
 $enddate = ($_POST['enddate'])? $_POST['enddate'] : date("d-m-y", strtotime(date()." + 1 month"));;
 require("includes/dateDiff.php");
 $today = ($_POST['startdate'])? $_POST['enddate'] : date("d-m-y");;
@@ -89,5 +90,8 @@ $_SESSION['schedule']=$schedule;
   </p>
   <div class="newbut"><a href="test.php">Create another schedule</a></div>
     -->
+    <p>
+    <input type="submit" value="email reminders coming soon.." class="text_button">
+  </p>
 </form>
 </div>
