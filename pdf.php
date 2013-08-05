@@ -1,7 +1,7 @@
 <?php
 session_start();
 require('includes/fpdf.php');
-require_once('includes/krumo/class.krumo.php');
+// require_once('includes/krumo/class.krumo.php');
 
 	
 $date1 = ($_POST['date1']);

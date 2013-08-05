@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php session_start(); 
+
+require_once("includes/schedule_functions.php");
+//require_once('includes/krumo/class.krumo.php');
+require_once('includes/googledocs.php');
+
+?>
 
 <link href="styles/acalc.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"> </script>
@@ -33,9 +39,10 @@ $(document).ready(function() {
 <h1>Assignment Calculator</h1>
 
 <?php 
+//krumo($_POST);
 $enddate = ($_POST['enddate'])? $_POST['enddate'] : date("d-m-y", strtotime(date()." + 1 month"));;
 require("includes/dateDiff.php");
-$today = ($_POST['startdate'])? $_POST['enddate'] : date("d-m-y");;
+$today = ($_POST['startdate'])? $_POST['startdate'] : date("d-m-y");;
 
 
 $assignment_end =  dateDiff("-", $enddate, $today);
@@ -43,9 +50,7 @@ $assignment_end =  dateDiff("-", $enddate, $today);
 error_reporting(E_ALL);
 ini_set('display_errors','On');
 // do this in a function?
-require_once("includes/schedule_functions.php");
-//require_once('includes/krumo/class.krumo.php');
-require_once('includes/googledocs.php');
+
 $googledoc = "https://docs.google.com/spreadsheet/pub?key=0AkXIzcr-VBVDdEMzUDA2Wm5OQ0k4LVRLVFhCTnJ1Vmc&single=true&gid=0&output=csv";
 
 $schedule = google_input($googledoc);
