@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 <?php 
 //krumo($_POST);
-$enddate = ($_POST['enddate'])? $_POST['enddate'] : date("d-m-y", strtotime(date()." + 1 month"));;
+$enddate = ($_POST['enddate'])? $_POST['enddate'] : date("d-m-y", strtotime(date("d-m-y")." + 1 month"));;
 require("includes/dateDiff.php");
 $today = ($_POST['startdate'])? $_POST['startdate'] : date("d-m-y");;
 
