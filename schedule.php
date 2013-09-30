@@ -1,7 +1,7 @@
 <?php session_start(); 
 
 require_once("includes/schedule_functions.php");
-//require_once('includes/krumo/class.krumo.php');
+require_once('includes/krumo/class.krumo.php');
 require_once('includes/googledocs.php');
 
 ?>
@@ -58,6 +58,7 @@ $schedule = parse_google_schedule($schedule);
 
 $num_id = 1;
 $last_deadline = 0;
+
 foreach($schedule as $key => $phase) {
 
     $sections = $phase['sections'];

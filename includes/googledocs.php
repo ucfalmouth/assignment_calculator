@@ -22,7 +22,7 @@ function parse_google_schedule($schedule_array) {
   foreach($headers as $header) {
     $header = strtolower($header);
      //echo $header;
-    if (!strstr($header, '#')){
+    if (!strstr($header, '#')){ // allows comment out irrelevant columns
       if (strstr($header, 'phase')){
         $column_phase = $i;
       } elseif (strstr($header, 'section')){
@@ -41,14 +41,15 @@ function parse_google_schedule($schedule_array) {
         $column_duration = $i;
       }
     }
-
     $i++;
   }
+  krumo($headers);
   unset($schedule_array[0]);
-  $i=0;
+  $i=0; 
   $p = 0;
   foreach($schedule_array as $row_num => $row) {
-    // is this a main essay phase?  
+    // step through the cells of the spreadsheet row
+    // is this a main essay phase? (ie the first column has content)
     if ($row[$column_phase]) {
       $i = 0;
       $schedule[$p]['phase'] = $row[$column_phase];
@@ -58,23 +59,24 @@ function parse_google_schedule($schedule_array) {
         'description' => strip_format($row[$column_description]),
         'links' => array(array('title' => $row[$column_link_text], 'url' =>$row[$column_link_url])),
       );
-      $lastparent = $p;
-      $lastsection = $i;
+      $lastphase = $p;
+      $lastsection = 0; // reset section count
       $i++;
       $p++;
     } elseif ($row[$column_section]) { // is this a section within a phase?
-      $schedule[$lastparent]['sections'][$i] = array(
-        'title'=>$row[$column_section],
+      $schedule[$lastphase]['sections'][$i] = array(
+        'title' => $row[$column_section],
         'description' => strip_format($row[$column_description]),
       );
-      $schedule[$lastparent]['sections'][$i]['links'][] = array('title' => $row[$column_link_text], 'url' =>$row[$column_link_url]);
+      $schedule[$lastphase]['sections'][$i]['links'][] = array('title' => $row[$column_link_text], 'url' =>$row[$column_link_url]);
       $lastsection = ($lastsection)? $lastsection : $i;
       $i++;
     } elseif ($row[$column_link_url]) { // is this a link to add to section?
-      $schedule[$lastparent]['sections'][$lastsection]['links'][] = array('title' => $row[$column_link_text], 'url' =>$row[$column_link_url]);
+      $schedule[$lastphase]['sections'][$lastsection]['links'][] = array('title' => $row[$column_link_text], 'url' =>$row[$column_link_url]);
       $lastsection = ($lastsection)? $lastsection : $i;
     } 
   }
+  krumo($schedule);
   return $schedule;
 }
 
