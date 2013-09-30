@@ -43,40 +43,40 @@ function parse_google_schedule($schedule_array) {
     }
     $i++;
   }
-  krumo($headers);
+  //krumo($headers);
   unset($schedule_array[0]);
-  $i=0; 
+  $s=0; 
   $p = 0;
   foreach($schedule_array as $row_num => $row) {
     // step through the cells of the spreadsheet row
     // is this a main essay phase? (ie the first column has content)
     if ($row[$column_phase]) {
-      $i = 0;
+      $s = 0;
       $schedule[$p]['phase'] = $row[$column_phase];
       $schedule[$p]['duration'] = $row[$column_duration];
-      $schedule[$p]['sections'][$i] = array(
+      $schedule[$p]['sections'][$s] = array(
         'title'=>$row[$column_section],
         'description' => strip_format($row[$column_description]),
         'links' => array(array('title' => $row[$column_link_text], 'url' =>$row[$column_link_url])),
       );
       $lastphase = $p;
-      $lastsection = 0; // reset section count
-      $i++;
+      $lastsection = $s; // reset section count
+      $s++;
       $p++;
     } elseif ($row[$column_section]) { // is this a section within a phase?
-      $schedule[$lastphase]['sections'][$i] = array(
+      $schedule[$lastphase]['sections'][$s] = array(
         'title' => $row[$column_section],
         'description' => strip_format($row[$column_description]),
       );
-      $schedule[$lastphase]['sections'][$i]['links'][] = array('title' => $row[$column_link_text], 'url' =>$row[$column_link_url]);
-      $lastsection = ($lastsection)? $lastsection : $i;
-      $i++;
+      $schedule[$lastphase]['sections'][$s]['links'][] = array('title' => $row[$column_link_text], 'url' =>$row[$column_link_url]);
+      $lastsection = $s;
+      $s++;
     } elseif ($row[$column_link_url]) { // is this a link to add to section?
       $schedule[$lastphase]['sections'][$lastsection]['links'][] = array('title' => $row[$column_link_text], 'url' =>$row[$column_link_url]);
-      $lastsection = ($lastsection)? $lastsection : $i;
+      $lastsection = ($lastsection)? $lastsection : $s;
     } 
   }
-  krumo($schedule);
+  //krumo($schedule);
   return $schedule;
 }
 
