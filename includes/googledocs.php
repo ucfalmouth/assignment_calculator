@@ -18,6 +18,7 @@ function google_input($googledoc) {
 function parse_google_schedule($schedule_array) {
   $i=0;
   $headers = $schedule_array[0];
+  /*
   // identify columns by header text (allows spreadsheet form to change)
   foreach($headers as $header) {
     $header = strtolower($header);
@@ -25,24 +26,39 @@ function parse_google_schedule($schedule_array) {
     if (!strstr($header, '#')){ // allows comment out irrelevant columns
       if (strstr($header, 'phase')){
         $column_phase = $i;
+        //print "\$column_phase = $column_phase  ";
       } elseif (strstr($header, 'section')){
         $column_section = $i;
+        //print "\$column_section = $column_section  ";
       } elseif (strstr($header, 'link')){
         if (strstr($header, 'text')){
           $column_link_text = $i;
+          //print "\$column_link_text = $column_link_text  ";
           //echo 'url_text: '.$header;
         } elseif (strstr($header, 'link')){
           $column_link_url = $i;
+          //print "\$column_link_url = $column_link_url  ";
           //echo 'url_url:  '.$i;
         }
       } elseif (strstr($header, 'description')){
         $column_description = $i;
+        //print "\$column_description = $column_description  ";
       } elseif (strstr($header, 'duration')){
         $column_duration = $i;
+        //print "\$column_duration = $column_duration  ";
       }
     }
     $i++;
   }
+  */
+
+  $column_phase = 0;
+  $column_section = 3;
+  $column_link_text = 4;
+  $column_link_url = 5;
+  $column_description = 7;
+  $column_duration = 1;
+
   //krumo($headers);
   unset($schedule_array[0]);
   $s=0; 
