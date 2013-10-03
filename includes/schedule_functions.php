@@ -5,7 +5,7 @@ function phase_list($section, $steps = array(), $date, $num_id, $class = NULL) {
     ?>
     <li>
     <div class='acinfo <?php echo $class; ?>'>
-        <span><?php echo $section; ?></span>to be completed on: <b><?php echo $date ?><br></b>
+        <span><?php echo $section; ?></span>to be completed by: <b><?php echo $date ?><br></b>
         <a id="displayText<?php echo $num_id; ?>" href="javascript:showMore(<?php echo $num_id; ?>);">View Work Breakdown +</a>
         <div id="toggleText<?php echo $num_id; ?>" style="display: none;" >
             <ul>
